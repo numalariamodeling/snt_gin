@@ -1,0 +1,2 @@
+# Mathematical Modelling
+This folder contains all the codes related to the mathematical modelling part of the project. This includes the code we use to setup climate, demographics and intervention inputs. It also contains the code for seasonality and baseline calibration, as well as code to conduct the actual simulations from the past (1960) to "present" (2022) to future (2027).
