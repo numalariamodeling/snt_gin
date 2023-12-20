@@ -1,3 +1,8 @@
+####
+# This script is used to covert Loua's SMC data to a dataframe of U5 and O5
+# per cycle coverage for each district in each year (with data available)
+####
+
 library(dplyr)
 library(tidyr)
 
