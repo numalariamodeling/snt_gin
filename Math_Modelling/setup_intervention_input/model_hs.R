@@ -1,8 +1,15 @@
+####
+# This script is used to fit SPDE-INLA model to map health seeking rates down 
+# to pixel level. This script should only be run after running 
+# `make_data_for_hs.R`
+####
 library(INLA)
-source("input_processor/load_path_lib.R")
-source("input_processor/functions.R")
+library(raster)
+library(dplyr)
 
-intdatadir <- file.path(datadir, "intermediate_data")
+shpfile <- "data/shp/GIN_adm2.shp"
+master_csv <- "data/guinea_DS_pop.csv"
+intdatadir <- "data/intermediate_data"
 shp <- shpfile |> shapefile() |>
   spTransform(CRS("+init=epsg:32628"))
 master_df <- data.table::fread(master_csv)
@@ -104,6 +111,7 @@ model_cm_year <- function (yr) {
   data.table::fwrite(cm_by_ds, outname)
 }
 
+# Apply model to the DHS years
 model_cm_year(2012)
 model_cm_year(2018)
 model_cm_year(2021)
