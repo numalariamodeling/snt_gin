@@ -4,7 +4,7 @@
 
 Scripts to calibrating SMC efficacy to Milligan/Zongo et al SMC trial in Burkina Faso using EMOD's vaccine campaign event as approximation (without  parasite clearing drug).
 ([malaria_vaccdrug_campaigns.py](https://github.com/InstituteforDiseaseModeling/dtk-tools-malaria/blob/master/malaria/interventions/malaria_vaccdrug_campaigns.py))
-The c
+
 Note: in these fitting scripts the vaccine decay duration is per default scaled using
 `'Decay_Time_Constant': vacc_decay_duration / math.log(2)`, with math.log(2)~0.6931471805599453.
 

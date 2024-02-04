@@ -10,13 +10,11 @@ from simtools.SetupParser import SetupParser
 from simtools.ExperimentManager.ExperimentManagerFactory import ExperimentManagerFactory
 from simtools.ModBuilder import ModBuilder, ModFn
 from malaria.interventions.malaria_vaccine import add_vaccine
+from load_paths import load_box_paths
 
-wdir = os.getcwd()
-sys.path.append('../')
-from vaccSMC.vaccSMC_milligan_helper import set_EIR, setup_simulation, add_case_management, diagnostic_survey
+from vaccSMC_milligan_helper import set_EIR, setup_simulation, add_case_management, diagnostic_survey
+wdir = os.path.join(os.getcwd(), "Math_Modelling/smc_efficacy")
 
-sys.path.append('../../')
-from helper_scripts.load_paths import load_box_paths
 
 logger = logging.getLogger(__name__)
 if os.name == "posix":
@@ -66,7 +64,7 @@ hrp2_report_start = (sim_years - 2) * 365 + hrp2_data_collection_start
 numseeds = 6
 np.random.seed(4326)
 datapath, project_path = load_box_paths()
-samp_df = pd.read_csv(os.path.join(wdir, 'vaccsmc_single', 'par_out', f'rnd{rnd}.csv'))
+samp_df = pd.read_csv(os.path.join(wdir, 'par_out', f'rnd{rnd}.csv'))
 
 # must run every time i.e. not in builder
 setup_simulation(cb, sim_years, 7,report_start)

@@ -1,0 +1,23 @@
+﻿study,SMC,PE,PE_low,PE_up
+mali_2015,within previous 28 days,98.3,94.1,99.5
+mali_2015,29-42 days ago,51.8,-43.2,83.8
+mali_2015,43+ days ago,,,
+thegambia_2015,within previous 28 days,85,43.1,96
+thegambia_2015,29-42 days ago,77.2,47.3,90.2
+thegambia_2015,43+ days ago,,,
+burkinafaso_2016,within previous 28 days,93.4,83.1,97.4
+burkinafaso_2016,29-42 days ago,57.2,-14.4,84
+burkinafaso_2016,43+ days ago,,,
+chad_2016,within previous 28 days,77.8,53.1,89.5
+chad_2016,29-42 days ago,56.6,-25.6,85
+chad_2016,43+ days ago,,,
+mali_2016,within previous 28 days,72.9,58.5,82.3
+mali_2016,29-42 days ago,46.3,8.2,68.6
+mali_2016,43+ days ago,,,
+nigeria_2016,within previous 28 days,83.1,69.1,90.8
+nigeria_2016,29-42 days ago,63.7,12.7,84.9
+nigeria_2016,43+ days ago,,,
+thegambia_2016,within previous 28 days,91.9,83,96.1
+thegambia_2016,29-42 days ago,77.9,46.6,90.8
+thegambia_2016,43+ days ago,,,
+pooled,within previous 28 days,88,79,94

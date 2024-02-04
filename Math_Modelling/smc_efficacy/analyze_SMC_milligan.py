@@ -23,10 +23,7 @@ class CasesAvertedAnalyzer(BaseAnalyzer):
         '''
 
         super(CasesAvertedAnalyzer, self).__init__(working_dir=working_dir,
-                                                   # filenames=["output/MalariaSummaryReport_Interval_7_from_3863.json"]) #AQ PD sweep
-                                                   # filenames = ["output/MalariaSummaryReport_Weekly_2020_2021.json"]) #Guinea
-                                                   filenames=[
-                                                       "output/MalariaSummaryReport_Monthly_from_3498.json"])  # BF
+                                                   filenames=["output/MalariaSummaryReport_Monthly_from_3498.json"])  # BF
         # filenames=["output/MalariaSummaryReport_5th_year_August.json"]) #kita
         self.sweep_variables = sweep_variables or ["SMC_Coverage"]
         self.exp_name = exp_name
