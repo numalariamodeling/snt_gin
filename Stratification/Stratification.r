@@ -15,8 +15,8 @@ annual_routine_data_adjusted_update = annual_routine_data_adjusted %>%
   
 ### Plots all incidences
 ### Crude incidence
-g1 = HD_sff %>%
-  filter(year == 2021) %>%
+Fig3.A = HD_sff %>%
+  filter(year == 2022) %>%
   tm_shape() +
   #tm_polygons(col = "net_use", breaks = c(0, 35,45, 55, 65, 75, 90), palette = "viridis") +
   tm_polygons("crude_incidence", title = "Incidence pour 1000", style = "fixed",
@@ -31,7 +31,7 @@ g1 = HD_sff %>%
 ### 
 
 g2 = HD_sff %>%
-  filter(year == 2022) %>%
+  filter(year == 2021) %>%
   tm_shape() +
   #tm_polygons(col = "net_use", breaks = c(0, 35,45, 55, 65, 75, 90), palette = "viridis") +
   tm_polygons("crude_incidence", title = "Incidence pour 1000", style = "fixed",
