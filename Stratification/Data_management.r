@@ -1,7 +1,4 @@
-### Missing data
-
-col = c( "susp", "testrdt", "testmic","test","confrdt", "confmic", "conf", "pres","pressev", "maltreat", "maladm","maldth")
-
+###1 Missing values 
 
 data_routine[, col][data_routine[, col] == 0] <- NA
 
@@ -30,28 +27,28 @@ missing_data = data_routine %>%
   select(Region, District, date, Annee, Mois, type, Numerateur, Denominateur, Proportion)
 
 
-  g = ggplot(test, aes(x = as.factor(date), y = type, fill = Proportion)) +
+ Figure S1.2: = ggplot(test, aes(x = as.factor(date), y = type, fill = Proportion)) +
   geom_tile() +
   scale_fill_viridis (option = 'D') +
   xlab("Mois-Annee") + 
   ylab("Indicateurs") +
   theme_classic()
 
-g + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+###2. Outliers detection
 
-### Replace missing values
+data = data_allout %>% gather(allout, allout_u5, allout_ov5, allout_preg, key='indicators', value="valeur")
 
-ind <- which(col_name$outliers == "valeurs aberrantes")
 
-col_name$valeurs_imputees = rep(NA, length(nrow(col_name)))
+p = ggplot(data = data, aes(x = valeur, y = name, color = as.factor(year)))+
+  geom_point() +
+  theme_classic() +
+  theme(legend.position="bottom") +
+  xlab('') +
+  ylab('') 
 
-col_name$valeurs_imputees[ind] <- sapply(ind, function(i) with(col_name, mean(c(valeurs[i-1], valeurs[i+1]))))
-
-col_name = col_name %>%
-  mutate(valeurs_imputees = ifelse(is.na(valeurs_imputees), valeurs, valeurs_imputees))
-
+p = p+ labs (color = 'year')
   
-  ### Coherence control
+###3. Review of data coherence 
 
 coherence_data = data_routine %>%
   select(adm1, adm2, hf, month, year,  test, susp, conf, maltreat, maladm, maldth) %>%
@@ -61,8 +58,9 @@ coherence_data = data_routine %>%
   pivot_longer(cols = test_suspects:conf_traite, names_to = 'type', values_to = 'Value')
 
 
-  ### Reporting rate
-cols = c('conf', 'susp', 'test')
+
+
+### 4.  Reporting rate using only confirmed cases
 
 data_hf_actifs[, cols][data_hf_actifs[, cols] == 0] <- NA
 
@@ -100,4 +98,4 @@ p = p + theme(
   panel.grid.minor = element_blank()
 )
 
-p = p + labs(fill = 'Reportin rate (Conf, test, susp)')
+Figure S1.1 = p + labs(fill = 'Reportin rate (Conf, test, susp)')
