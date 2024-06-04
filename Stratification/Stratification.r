@@ -12,9 +12,25 @@ annual_routine_data_adjusted_update = annual_routine_data_adjusted %>%
     incidence_adj_presumed_cases_RR = (cases_adjusted_presumed_RR/Population)*1000,
     incidence_adj_presumed_cases_RR_TSR = (cases_adjusted_presumed_RR_TSR/Population)*1000)
 
-  
+###2. Prevalence from Malaria atlas Project
+
+GN_2021 = GIN_MAP_output_WHOpop_20230206_3_ %>%
+  filter(year == 2021 & Region !="Conakry") %>%
+  group_by(District) %>%
+  summarise(PFPR_u5 = mean(pfpr_u5, na.rm = TRUE)) %>%
+  mutate(PFPR_u5 = PFPR_u5*100)
+
+
+###3. All causes mortality from IHME
+
+GIN_HDs_aggregated_mortality_estimates = GIN_HDs_aggregated_mortality_estimates %>%
+  mutate(u5_mortality = round(u5_q_mean*100,2), adm2 = District) %>%
+  filter(year == 2017)
+
+
 ### Plots all incidences
-### Crude incidence
+### Figures for the stratification
+## Fig 3A
 Fig3.A = HD_sff %>%
   filter(year == 2022) %>%
   tm_shape() +
@@ -27,9 +43,59 @@ Fig3.A = HD_sff %>%
             legend.text.size = 0.6,frame = FALSE)
 
 
+Fig3.A = HD_sff %>%
+  filter(year == 2022) %>%
+  tm_shape() +
+  tm_polygons("incidence_adj_presumed_cases", title = "Incidence pour 1000", style = "fixed",
+              breaks = c(0, 100, 250, 450, 1000),
+              palette = c( "#2166AC" , "#FDDBC7", "#F4A582", "#E41A1C","#B2182B")) +
+  tm_layout(legend.outside = TRUE,
+            legend.title.size = 0.6,
+            legend.text.size = 0.6,frame = FALSE)
 
-### 
+Fig3.A = HD_sff %>%
+  filter(year == 2022) %>%
+  tm_shape() +
+  tm_polygons("incidence_adj_presumed_cases_RR", title = "Incidence pour 1000", style = "fixed",
+              breaks = c(0, 100, 250, 450, 1000),
+              palette = c( "#2166AC" , "#FDDBC7", "#F4A582", "#E41A1C","#B2182B")) +
+  tm_layout(legend.outside = TRUE,
+            legend.title.size = 0.6,
+            legend.text.size = 0.6,frame = FALSE)
 
+Fig3.A = HD_sff %>%
+  filter(year == 2022) %>%
+  tm_shape() +
+  tm_polygons("incidence_adj_presumed_cases_RR_TSR", title = "Incidence pour 1000", style = "fixed",
+              breaks = c(0, 100, 250, 450, 1000),
+              palette = c( "#2166AC" , "#FDDBC7", "#F4A582", "#E41A1C","#B2182B")) +
+  tm_layout(legend.outside = TRUE,
+            legend.title.size = 0.6,
+            legend.text.size = 0.6,frame = FALSE)
+
+
+## Fig 3B
+
+
+Fig3.B = HD_prev %>%
+  tm_shape() +
+  tm_polygons("PFPR_u5", title = "", style = "fixed",
+              palette = "-RdYlBu") +
+  tm_layout(legend.outside = TRUE,
+            legend.title.size = 0.6,
+            legend.text.size = 0.6, frame = FALSE)
+
+Fig3.B = HD_mortality %>%
+  tm_shape() +
+  tm_polygons("u5_mortality", title = "", style = "fixed",
+              breaks = c(0, 6.5, 7.5, 9.5, 12.5, 15, 20),
+              labels = c("<6.5","6.5-<7.5",'7.5<9.5', "9.5-<12.5", "12.5-<15", ">=15"),
+              palette = "-RdYlBu") +
+  tm_layout(legend.outside = TRUE,
+            legend.title.size = 0.6,
+            legend.text.size = 0.6, frame = FALSE)
+
+####
 g2 = HD_sff %>%
   filter(year == 2021) %>%
   tm_shape() +
@@ -80,8 +146,6 @@ g5 = HD_sff %>%
             legend.text.size = 0.6,frame = FALSE)
 
 
-tmap_arrange(g1, g2, g3,g4,g5,nrow=2)
-
 ### adjinc 1
 all_incidences_adjinc1 = HD_sff %>%
   tm_shape() +
@@ -118,29 +182,8 @@ all_incidences_adjinc3 = HD_sff %>%
             legend.text.size = 0.6,frame = FALSE)
 
 
-###2. Prevalence from Malaria atlas Project
-
-GN_2021 = GIN_MAP_output_WHOpop_20230206_3_ %>%
-  filter(year == 2021 & Region !="Conakry") %>%
-  group_by(District) %>%
-  summarise(PFPR_u5 = mean(pfpr_u5, na.rm = TRUE)) %>%
-  mutate(PFPR_u5 = PFPR_u5*100)
 
 
-prev = HD_prev %>%
-  tm_shape() +
-  tm_polygons("PFPR_u5", title = "", style = "fixed",
-              palette = "-RdYlBu") +
-  tm_layout(legend.outside = TRUE,
-            legend.title.size = 0.6,
-            legend.text.size = 0.6, frame = FALSE)
-
-
-###3. All causes mortality from IHME
-
-GIN_HDs_aggregated_mortality_estimates = GIN_HDs_aggregated_mortality_estimates %>%
-  mutate(u5_mortality = round(u5_q_mean*100,2), adm2 = District) %>%
-  filter(year == 2017)
 
 
 u5_mortality = HD_mortality %>%
