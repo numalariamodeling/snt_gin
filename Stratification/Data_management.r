@@ -1,3 +1,9 @@
+### DHSI2 data at district level sahred
+
+data_routine = data_routine %>%
+  group_by(adm2, year) %>%
+  dplyr::summarise(across(allout_u5:maltreat_u5, ~ sum(.x, na.rm = TRUE)))
+
 ###1 Missing values 
 
 data_routine[, col][data_routine[, col] == 0] <- NA
