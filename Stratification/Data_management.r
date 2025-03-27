@@ -66,7 +66,7 @@ coherence_data = data_routine %>%
 
 
 
-### 4.  Reporting rate using only confirmed cases
+### 4.  Reporting rate using confirmed cases, suspected and tested cases
 
 data_hf_actifs[, cols][data_hf_actifs[, cols] == 0] <- NA
 
